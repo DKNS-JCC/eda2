@@ -1,0 +1,32 @@
+#
+#
+# Regla de dependencias
+#
+
+OBJS = prueba1.o arbol.o cola.o pila.o
+CC = gcc
+OPS = -O -c -g
+
+arbol : $(OBJS)
+	$(CC) $(OBJS) -o arbol
+
+#
+# Reglas de construcción
+#
+
+prueba1.o : arbol.c arbol.h cola.h pila.h
+	$(CC) $(OPS) prueba1.c
+
+arbol.o : arbol.c arbol.h cola.h pila.h
+	$(CC) $(OPS) arbol.c
+
+cola.o: cola.c cola.h arbol.h 
+	$(CC) $(OPS) cola.c
+
+pila.o: pila.c arbol.h pila.h
+	$(CC) $(OPS) pila.c
+
+clean:
+	rm *.o 
+
+

@@ -1,0 +1,58 @@
+//Mercedes Parra Sánchez
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include "pila.h"
+
+
+
+int pilaCreaVacia(Pila *p)
+{
+    p=NULL;
+    return 0;
+    
+}
+
+int pilaVacia(Pila *p)
+{
+    
+    return(p==NULL);
+    
+}
+
+int pilaInserta(Pila *p,tipoElemento elemento)
+{
+    tipoCelda * temp;
+    
+    temp = (tipoCelda *) malloc (sizeof(tipoCelda));
+    if(temp == NULL) return -1;
+    
+    temp->elemento=elemento;
+    if(pilaVacia(p)){
+        temp->sig=NULL;
+    }else
+        temp->sig=*p;
+    *p=temp;
+    
+    return 0;
+}
+
+tipoElemento pilaSuprime(Pila *p)
+{
+    tipoCelda * aBorrar;
+    tipoElemento x;
+    
+	if(*p==NULL)
+		return -1;
+    aBorrar=*p;
+    /*if(aBorrar==NULL) {
+     return NULL;
+    }*/
+    
+    *p=aBorrar->sig;
+    x=aBorrar->elemento;
+    free(aBorrar);
+
+    return x;
+}
